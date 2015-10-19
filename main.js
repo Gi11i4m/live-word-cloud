@@ -62,7 +62,7 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	$scope.title = "Cegeka ASFM Feedback";
 	$scope.word = "";
 	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
-	$scope.validationPattern = /^[A-Za-z\-]{2,20}$/;
+	$scope.validationPattern = /^[A-Za-z]{2,20}$/;
 	$scope.patternMessage = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
 	$scope.submitButtonValue = defaultSubmitButtonValue;
 	$scope.isTextfieldDisabled = false;
