@@ -63,7 +63,7 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	$scope.word = "";
 	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
 	$scope.validationPattern = /^[A-Za-z\-]{2,20}$/;
-	$scope.patternMessage = "zorg dat je verbinding hebt en dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens";
+	$scope.patternMessage = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
 	$scope.submitButtonValue = defaultSubmitButtonValue;
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
