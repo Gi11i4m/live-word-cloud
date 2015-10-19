@@ -1,7 +1,7 @@
 var wordCloud = angular.module('wordCloud', []);
 
 wordCloud.factory('wordRepository', function($http) {
-	var wordCloudDatabaseUrl = 'http://gi11i4m.cloudant.com/word-cloud';
+	var wordCloudDatabaseUrl = 'https://gi11i4m.cloudant.com/word-cloud';
 	var wordCloudDocumentId = '/words';
 	
 	return {
