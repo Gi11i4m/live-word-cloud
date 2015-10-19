@@ -60,19 +60,22 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	$scope.word = "";
 	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
 	$scope.validationPattern = /^[A-Za-z\-]{2,20}$/;
-	$scope.submitButtonValue = "Geef feedback";
+	$scope.submitButtonValue = defaultSubmitButtonValue;
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
 	var localStorageCounterName = "wordUpdateCount";
+	var defaultSubmitButtonValue = "Geef feedback";
 
 	$scope.submitWord = function() {
 		if (hasReachedMaxTries()) {
-			error("reached_max_tries", "3x feedback is genoeg ;)");
+			error("3x feedback is genoeg ;)");
 		} else if ($scope.validationPattern.test($scope.word)) {
+			$scope.submitButtonValue = "Adding...";
+			$scope.isSubmitDisabled = true;
 			updateLocalStorage();
 			wordRepository.adWord($scope.word.trim(), success, error);
 		} else {
-			error("update_error", "Mislukt. Zorg dat je verbinding hebt en dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens.");
+			error("zorg dat je verbinding hebt en dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens");
 		}
 	};
 	
@@ -90,8 +93,9 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	}
 	
 	function error(error, message) {
-		console.log(error);
-		alert(message);
+		alert("Error: " + error);
+		$scope.isSubmitDisabled = false;
+		$scope.submitButtonValue = defaultSubmitButtonValue;
 	}
 	
 	function updateLocalStorage() {
@@ -107,5 +111,4 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		return false;
 		// localStorage.getItem(localStorageCounterName) >= 3;
 	}
-	
 });
