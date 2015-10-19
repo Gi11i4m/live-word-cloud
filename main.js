@@ -71,8 +71,8 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		if (hasReachedMaxTries()) {
 			error("3x feedback is genoeg ;)");
 		} else if ($scope.validationPattern.test($scope.word)) {
-			$scope.submitButtonValue = "Adding...";
 			$scope.isSubmitDisabled = true;
+			$scope.submitButtonValue = "Toevoegen...";
 			updateLocalStorage();
 			wordRepository.adWord($scope.word.trim(), success, error);
 		} else {
