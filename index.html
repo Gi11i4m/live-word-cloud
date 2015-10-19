@@ -1,0 +1,26 @@
+<html ng-app="wordCloud" ng-controller="WordCloudUpdateController">
+	<head>
+		<title ng-bind="title">Loading...</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#87CEFA">
+	</head>
+	<body id="update-form-body">
+		<!-- Settings -->
+		<form id="update-form" name="update-form" ng-submit="submitWord()">
+			<fieldset>
+				<legend ng-bind="legendMessage">Loading...</legend>
+				<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required>
+				<button id="submit" type="submit" ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue">
+					Loading...
+				</button>
+			</fieldset>
+			<p id="validation-message" ng-show="!isWordValid()">Zorg dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens.</p>
+		</form>
+		<!-- Scripts -->
+		<script src="jquery-2.1.4.min.js"></script>
+		<script src="angular.min.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
