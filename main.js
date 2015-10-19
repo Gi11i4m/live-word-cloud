@@ -56,6 +56,9 @@ wordCloud.controller('WordCloudController', function($scope, $timeout, $interval
 
 wordCloud.controller('WordCloudUpdateController', function($scope, wordRepository) {
 
+	var localStorageCounterName = "wordUpdateCount";
+	var defaultSubmitButtonValue = "Geef feedback";
+
 	$scope.title = "Cegeka ASFM Feedback";
 	$scope.word = "";
 	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
@@ -63,8 +66,6 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	$scope.submitButtonValue = defaultSubmitButtonValue;
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
-	var localStorageCounterName = "wordUpdateCount";
-	var defaultSubmitButtonValue = "Geef feedback";
 
 	$scope.submitWord = function() {
 		if (hasReachedMaxTries()) {
