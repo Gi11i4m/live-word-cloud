@@ -63,20 +63,21 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	$scope.word = "";
 	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
 	$scope.validationPattern = /^[A-Za-z\-]{2,20}$/;
+	$scope.patternMessage = "zorg dat je verbinding hebt en dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens";
 	$scope.submitButtonValue = defaultSubmitButtonValue;
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
 
 	$scope.submitWord = function() {
 		if (hasReachedMaxTries()) {
-			error("3x feedback is genoeg ;)");
+			error("max_tries_reached", "3x feedback is genoeg ;)");
 		} else if ($scope.validationPattern.test($scope.word)) {
 			$scope.isSubmitDisabled = true;
 			$scope.submitButtonValue = "Toevoegen...";
 			updateLocalStorage();
 			wordRepository.adWord($scope.word.trim(), success, error);
 		} else {
-			error("zorg dat je verbinding hebt en dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens");
+			error("word_pattern_error", $scope.patternMessage);
 		}
 	};
 	
@@ -94,7 +95,8 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	}
 	
 	function error(error, message) {
-		alert("Error: " + error);
+		var errorMessage = (message === -1 || message === null || message === undefined) ? "er ging iets mis..." : message;
+		$scope.legendMessage = "Error: " + errorMessage;
 		$scope.isSubmitDisabled = false;
 		$scope.submitButtonValue = defaultSubmitButtonValue;
 	}

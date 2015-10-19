@@ -16,7 +16,7 @@
 					Loading...
 				</button>
 			</fieldset>
-			<p id="validation-message" ng-show="!isWordValid()">Zorg dat je woord enkel letters en '-' bevat, en niet langer is dan 20 tekens.</p>
+			<p id="validation-message" ng-show="!isWordValid()">{{$scope.patternMessage}}</p>
 		</form>
 		<!-- Scripts -->
 		<script src="jquery-2.1.4.min.js"></script>
