@@ -10,6 +10,12 @@ html, body {
 	align-content: center;
 	align-items: center;
 	background: lightskyblue;
+	min-height: 350px;
+}
+#logo_cegeka {
+	position: absolute;
+	top: 10px;
+	left: 0;
 }
 #vis {
 	display: flex;
