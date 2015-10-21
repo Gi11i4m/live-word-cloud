@@ -1,6 +1,6 @@
 <html ng-app="wordCloud" ng-controller="WordCloudUpdateController">
 	<head>
-		<title ng-bind="title">Loading...</title>
+		<title ng-bind="title"></title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +12,9 @@
 		<!-- Settings -->
 		<form id="update-form" name="update-form" ng-submit="submitWord()">
 			<fieldset>
-				<legend ng-bind="legendMessage">Loading...</legend>
-				<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required>
-				<button id="submit" type="submit" ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue">
-					Loading...
-				</button>
+				<legend ng-bind="legendMessage"></legend>
+				<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required autofocus>
+				<button id="submit" type="submit" ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue"></button>
 			</fieldset>
 			<p id="validation-message" ng-show="!isWordValid()">{{patternMessage}}</p>
 		</form>
