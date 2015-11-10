@@ -20,8 +20,23 @@ wordCloud.factory('wordRepository', function($http) {
 	};
 });
 
-wordCloud.controller('WordCloudController', function($scope, $timeout, $interval, wordRepository) {
+wordCloud.factory('logger', function() {
+	
+	return {
+		logInfo : function(toLog) {
+			console.log("INFO", toLog);
+		},
+		logError : function(toLog) {
+			console.log("ERROR", toLog);
+		}
+	};
+});
 
+wordCloud.controller('WordCloudController', function($scope, $timeout, $interval, wordRepository, logger) {
+
+	var WORDS_UNCHANGED_MESSAGE = "Words unchanged";
+	var WORDS_CHANGED_MESSAGE =  "Refreshing words...";
+	
 	$scope.font = "Impact";
 	$scope.angleCount = 7;
 	$scope.angleFrom = -90;
@@ -35,86 +50,88 @@ wordCloud.controller('WordCloudController', function($scope, $timeout, $interval
 				$scope.words = wordString;
 				$timeout(refreshWords, 100);
 			} else {
-				console.log("Words unchanged" + "\nWords: " + $scope.words);
+				logger.logInfo(WORDS_UNCHANGED_MESSAGE + "\nWords: " + $scope.words);
 			}
-		}, logError);
+		}, logger.logError);
 	}
 
 	function refreshWords() {
-		console.log("Refreshing words..." + "\nWords: " + $scope.words);
+		logger.logInfo(WORDS_CHANGED_MESSAGE + "\nWords: " + $scope.words);
 		$('#go').click();
-	}
-
-	function logError(error) {
-		console.log(error);
 	}
 
 	/* EXECUTION LOOP */
 	wordPoll = $interval(refreshWordsIfChanged, 3000);
 });
 
-wordCloud.controller('WordCloudUpdateController', function($scope, wordRepository) {
+wordCloud.controller('WordCloudUpdateController', function($scope, wordRepository, logger) {
 
-	var localStorageCounterName = "wordUpdateCount";
-	var defaultSubmitButtonValue = "Geef feedback";
+	var LOCAL_STORAGE_COUNTER_NAME = "wordUpdateCount";
+	var SUBMIT_BUTTON_DEFAULT = "Geef feedback";
+	var SUBMIT_BUTTON_ADDING = "Toevoegen...";
+	var SUBMIT_BUTTON_SUCCESS = "Bedankt!";
+	var LEGEND_MESSAGE_SUCCESS = "Bedankt voor uw feedback!";
+	var LEGEND_MESSAGE_DEFAULT = "Omschrijf de ASWFM in één woord";
+	var VALIDATION_PATTERN = /^[A-Za-z]{2,20}$/;
+	var VALIDATION_PATTERN_MESSAGE = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
+	var MAX_TRIES_REACHED_MESSAGE = "3x feedback is genoeg ;)";
+	var GENERIC_ERROR_MESSAGE = "Er ging iets mis...";
 
 	$scope.word = "";
-	$scope.legendMessage = "Omschrijf de ASWFM in één woord!";
-	$scope.validationPattern = /^[A-Za-z]{2,20}$/;
-	$scope.patternMessage = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
-	$scope.submitButtonValue = defaultSubmitButtonValue;
+	$scope.legendMessage = LEGEND_MESSAGE_DEFAULT;
+	$scope.validationPattern = VALIDATION_PATTERN;
+	$scope.patternMessage = VALIDATION_PATTERN_MESSAGE;
+	$scope.submitButtonValue = SUBMIT_BUTTON_DEFAULT;
 	$scope.imagePath = "images/sfm.png";
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
+	$scope.isWordValid = isWordValid;
 
 	$scope.submitWord = function() {
 		if (hasReachedMaxTries() && isSmartphone()) {
-			error("max_tries_reached", "3x feedback is genoeg ;)");
-		} else if ($scope.validationPattern.test($scope.word)) {
+			error(MAX_TRIES_REACHED_MESSAGE);
+		} else if (isWordValid()) {
 			$scope.isSubmitDisabled = true;
-			$scope.submitButtonValue = "Toevoegen...";
+			$scope.submitButtonValue = SUBMIT_BUTTON_ADDING;
 			updateLocalStorage();
 			wordRepository.adWord($scope.word.trim(), success, error);
 		} else {
-			error("word_pattern_error", $scope.patternMessage);
+			error($scope.patternMessage);
 		}
 	};
 	
-	$scope.isWordValid = function() {
-		return $scope.word !== null && $scope.word !== undefined && $scope.validationPattern.test($scope.word);
+	function isWordValid() {
+		return $scope.word && $scope.validationPattern.test($scope.word);
 	};
 	
 	function success(response) {
-		console.log(response);
+		logger.logInfo(response);
 		
-		$scope.submitButtonValue = "Bedankt!";
-		$scope.legendMessage = "Bedankt voor uw feedback!";
+		$scope.submitButtonValue = SUBMIT_BUTTON_SUCCESS;
+		$scope.legendMessage = LEGEND_MESSAGE_SUCCESS;
 		$scope.isTextfieldDisabled = true;
 		$scope.isSubmitDisabled = true; 
 	}
 	
-	function error(error, message) {
-		var errorMessage = (message === -1 || message === null || message === undefined) ? "er ging iets mis..." : message;
-		$scope.legendMessage = "Error: " + errorMessage;
+	function error(message) {
+		var errorMessage = message ? message : GENERIC_ERROR_MESSAGE;
+		logger.logError(errorMessage);
+		
+		$scope.legendMessage = errorMessage;
 		$scope.isSubmitDisabled = false;
-		$scope.submitButtonValue = defaultSubmitButtonValue;
+		$scope.submitButtonValue = SUBMIT_BUTTON_DEFAULT;
 	}
 	
 	function updateLocalStorage() {
-		var updateCount = localStorage.getItem(localStorageCounterName);
-		
-		if (updateCount)
-			localStorage.setItem(localStorageCounterName, parseInt(updateCount)+1);
-		else
-			localStorage.setItem(localStorageCounterName, 1);
+		var updateCount = localStorage.getItem(LOCAL_STORAGE_COUNTER_NAME);
+		updateCount ? localStorage.setItem(LOCAL_STORAGE_COUNTER_NAME, parseInt(updateCount) + 1) : localStorage.setItem(LOCAL_STORAGE_COUNTER_NAME, 1);
 	}
 	
 	function hasReachedMaxTries() {
-		return localStorage.getItem(localStorageCounterName) >= 3;
+		return localStorage.getItem(LOCAL_STORAGE_COUNTER_NAME) >= 3;
 	}
 	
 	function isSmartphone() {
 		return navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i);
 	}
-
 });

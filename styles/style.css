@@ -3,12 +3,18 @@ html, body {
 	padding: 0;
 	background-color: #7BB1FF;
 }
+#word_cloud_body {
+	background-color: white;
+	overflow: hidden;
+}
 .md-padding {
 	background-color: #7BB1FF;
 }
 #vis {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
+	width: 100%;
 }
 #form {
 	display: none;
