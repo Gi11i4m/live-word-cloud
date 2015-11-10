@@ -74,7 +74,7 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	var LEGEND_MESSAGE_DEFAULT = "Omschrijf de ASWFM in één woord";
 	var VALIDATION_PATTERN = /^[A-Za-z]{2,20}$/;
 	var VALIDATION_PATTERN_MESSAGE = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
-	var MAX_TRIES_REACHED_MESSAGE = "3x feedback is genoeg ;)";
+	var MAX_TRIES_REACHED_MESSAGE = "3x feedback is genoeg <i class='fa fa-smile-o'></i>";
 	var GENERIC_ERROR_MESSAGE = "Er ging iets mis...";
 
 	$scope.word = "";
