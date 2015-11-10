@@ -1,26 +1,36 @@
-<html ng-app="wordCloud" ng-controller="WordCloudUpdateController">
+<html ng-app="wordCloud">
 	<head>
-		<title ng-bind="title"></title>
+		<title>Cegeka ASFM Feedback</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#87CEFA">
+
+		<link rel="stylesheet" href="styles/angular-material.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/style.css">
 	</head>
-	<body id="update-form-body">
-		<!-- Cegeka logo -->
-		<!-- <img id="logo_cegeka" src="logo_cegeka.png"> -->
-		<!-- Settings -->
-		<form id="update-form" name="update-form" ng-submit="submitWord()">
-			<fieldset>
-				<legend ng-bind="legendMessage"></legend>
-				<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required autofocus>
-				<button id="submit" type="submit" ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue"></button>
-			</fieldset>
-			<p id="validation-message" ng-show="!isWordValid()">{{patternMessage}}</p>
-		</form>
-		<!-- Scripts -->
-		<script src="jquery-2.1.4.min.js"></script>
-		<script src="angular.min.js"></script>
-		<script src="main.js"></script>
+	<body>
+
+		<div ng-controller="WordCloudUpdateController" ng-cloak>
+			<md-content class="md-padding">
+				<md-card>
+					<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+					<md-card-content>
+						<h2 class="md-title" ng-bind="legendMessage"></h2>
+						<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required autofocus>
+						<p id="validation-message" ng-show="!isWordValid()" ng-bind="patternMessage"></p>
+					</md-card-content>
+					<md-card-actions layout="row" layout-align="end center">
+						<md-button ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue" ng-click="submitWord()" aria-label="submit"></md-button>
+					</md-card-actions>
+				</md-card>
+			</md-content>
+		</div>
+
+		<script src="scripts/jquery-2.1.4.min.js"></script>
+		<script src="scripts/angular.min.js"></script>
+		<script src="scripts/angular-animate.min.js"></script>
+		<script src="scripts/angular-aria.min.js"></script>
+		<script src="scripts/angular-material.min.js"></script>
+		<script src="scripts/main.js"></script>
 	</body>
 </html>

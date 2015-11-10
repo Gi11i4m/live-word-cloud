@@ -1,12 +1,14 @@
-<html ng-app="wordCloud" ng-controller="WordCloudController">
+<html ng-app="wordCloud">
 	<head>
-		<title ng-bind="title">Loading...</title>
+		<title>Cegeka ASFM Feedback Word Cloud</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="styles/style.css">
 	</head>
-	<body>
+	<body ng-controller="WordCloudController">
+		
 		<!-- Placeholder -->
 		<div id="vis"></div>
+		
 		<!-- Settings -->
 		<form id="form">
 			<textarea id="text" ng-model="words"></textarea>
@@ -24,11 +26,15 @@
 			<input type="radio" name="scale" id="scale-sqrt" value="sqrt">
 			<input type="radio" name="scale" id="scale-linear" value="linear">
 		</form>
+		
 		<!-- Scripts -->
-		<script src="d3.js"></script>
-		<script src="cloud.min.js"></script>
-		<script src="jquery-2.1.4.min.js"></script>
-		<script src="angular.min.js"></script>
-		<script src="main.js"></script>
+		<script src="scripts/d3.js"></script>
+		<script src="scripts/cloud.min.js"></script>
+		<script src="scripts/jquery-2.1.4.min.js"></script>
+		<script src="scripts/angular.min.js"></script>
+		<script src="scripts/angular-animate.min.js"></script>
+  		<script src="scripts/angular-aria.min.js"></script>
+  		<script src="scripts/angular-material.min.js"></script>
+		<script src="scripts/main.js"></script>
 	</body>
 </html>

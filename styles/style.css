@@ -1,0 +1,35 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #7BB1FF;
+}
+.md-padding {
+	background-color: #7BB1FF;
+}
+#vis {
+	display: flex;
+	align-items: center;
+}
+#form {
+	display: none;
+}
+#text {
+	width: 100%;
+	height: 100px;
+}
+#validation-message {
+	color: crimson;
+   	text-align: center;
+}
+#word {
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+@media screen and (min-width: 800px) {
+	.md-padding {
+		padding-left: 30%;
+		padding-right: 30%;
+	}
+}

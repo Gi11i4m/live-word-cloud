@@ -1,4 +1,4 @@
-var wordCloud = angular.module('wordCloud', []);
+var wordCloud = angular.module('wordCloud', ['ngMaterial']);
 
 wordCloud.factory('wordRepository', function($http) {
 	var wordCloudDatabaseUrl = 'https://gi11i4m.cloudant.com/word-cloud';
@@ -22,7 +22,6 @@ wordCloud.factory('wordRepository', function($http) {
 
 wordCloud.controller('WordCloudController', function($scope, $timeout, $interval, wordRepository) {
 
-	$scope.title = "Cegeka ASFM Feedback Word Cloud";
 	$scope.font = "Impact";
 	$scope.angleCount = 7;
 	$scope.angleFrom = -90;
@@ -59,17 +58,17 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	var localStorageCounterName = "wordUpdateCount";
 	var defaultSubmitButtonValue = "Geef feedback";
 
-	$scope.title = "Cegeka ASFM Feedback";
 	$scope.word = "";
-	$scope.legendMessage = "Beschrijf de ASWFM in één woord!";
+	$scope.legendMessage = "Omschrijf de ASWFM in één woord!";
 	$scope.validationPattern = /^[A-Za-z]{2,20}$/;
 	$scope.patternMessage = "zorg dat je woord enkel letters bevat, en niet langer is dan 20 tekens";
 	$scope.submitButtonValue = defaultSubmitButtonValue;
+	$scope.imagePath = "images/sfm.png";
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
 
 	$scope.submitWord = function() {
-		if (hasReachedMaxTries()) {
+		if (hasReachedMaxTries() && isSmartphone()) {
 			error("max_tries_reached", "3x feedback is genoeg ;)");
 		} else if ($scope.validationPattern.test($scope.word)) {
 			$scope.isSubmitDisabled = true;
@@ -88,7 +87,7 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	function success(response) {
 		console.log(response);
 		
-		$scope.submitButtonValue = "Done!";
+		$scope.submitButtonValue = "Bedankt!";
 		$scope.legendMessage = "Bedankt voor uw feedback!";
 		$scope.isTextfieldDisabled = true;
 		$scope.isSubmitDisabled = true; 
@@ -111,7 +110,11 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	}
 	
 	function hasReachedMaxTries() {
-		return false;
-		// localStorage.getItem(localStorageCounterName) >= 3;
+		return localStorage.getItem(localStorageCounterName) >= 3;
 	}
+	
+	function isSmartphone() {
+		return navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i);
+	}
+
 });
