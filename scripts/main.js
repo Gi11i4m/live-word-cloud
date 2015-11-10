@@ -66,10 +66,12 @@ wordCloud.controller('WordCloudController', function($scope, $timeout, $interval
 
 wordCloud.controller('WordCloudUpdateController', function($scope, wordRepository, logger) {
 
+	var WORD_DEFAULT = "";
 	var LOCAL_STORAGE_COUNTER_NAME = "wordUpdateCount";
 	var SUBMIT_BUTTON_DEFAULT = "Geef feedback";
 	var SUBMIT_BUTTON_ADDING = "Toevoegen...";
 	var SUBMIT_BUTTON_SUCCESS = "Bedankt!";
+	var RESET_BUTTON_DEFAULT = "Reset";
 	var LEGEND_MESSAGE_SUCCESS = "Bedankt voor uw feedback!";
 	var LEGEND_MESSAGE_DEFAULT = "Omschrijf de ASWFM in één woord";
 	var VALIDATION_PATTERN = /^[A-Za-z]{2,20}$/;
@@ -78,15 +80,18 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 	var GENERIC_ERROR_MESSAGE = "Er ging iets mis...";
 	var CARD_IMAGE_URL = "images/sfm.png";
 
-	$scope.word = "";
+	$scope.word = WORD_DEFAULT;
 	$scope.legendMessage = LEGEND_MESSAGE_DEFAULT;
 	$scope.validationPattern = VALIDATION_PATTERN;
 	$scope.patternMessage = VALIDATION_PATTERN_MESSAGE;
 	$scope.submitButtonValue = SUBMIT_BUTTON_DEFAULT;
+	$scope.resetButtonValue = RESET_BUTTON_DEFAULT;
 	$scope.imagePath = CARD_IMAGE_URL;
 	$scope.isTextfieldDisabled = false;
 	$scope.isSubmitDisabled = false;
+	$scope.isResetVisible = false;
 	$scope.isWordValid = isWordValid;
+	$scope.reset = reset;
 
 	$scope.submitWord = function() {
 		if (hasReachedMaxTries() && isSmartphone()) {
@@ -111,7 +116,9 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		$scope.submitButtonValue = SUBMIT_BUTTON_SUCCESS;
 		$scope.legendMessage = LEGEND_MESSAGE_SUCCESS;
 		$scope.isTextfieldDisabled = true;
-		$scope.isSubmitDisabled = true; 
+		$scope.isSubmitDisabled = true;
+		
+		if (!isSmartphone()) $scope.isResetVisible = true;
 	}
 	
 	function error(message) {
@@ -121,6 +128,14 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		$scope.legendMessage = errorMessage;
 		$scope.isSubmitDisabled = false;
 		$scope.submitButtonValue = SUBMIT_BUTTON_DEFAULT;
+	}
+	
+	function reset() {
+		$scope.submitButtonValue = SUBMIT_BUTTON_DEFAULT;
+		$scope.legendMessage = LEGEND_MESSAGE_DEFAULT;
+		$scope.isTextfieldDisabled = false;
+		$scope.isSubmitDisabled = false;
+		$scope.word = WORD_DEFAULT;
 	}
 	
 	function updateLocalStorage() {
