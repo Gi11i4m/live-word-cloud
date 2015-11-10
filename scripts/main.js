@@ -135,6 +135,7 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		$scope.legendMessage = LEGEND_MESSAGE_DEFAULT;
 		$scope.isTextfieldDisabled = false;
 		$scope.isSubmitDisabled = false;
+		$scope.isResetVisible = false;
 		$scope.word = WORD_DEFAULT;
 	}
 	
