@@ -1,14 +1,14 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	background-color: #7BB1FF;
+	background-color: #0AB3F6;
 }
 #word_cloud_body {
 	background-color: white;
 	overflow: hidden;
 }
 .md-padding {
-	background-color: #7BB1FF;
+	background-color: #0AB3F6;
 }
 #vis {
 	display: flex;
