@@ -106,6 +106,11 @@ wordCloud.controller('WordCloudUpdateController', function($scope, wordRepositor
 		}
 	};
 	
+	$scope.enterSubmit = function(event) {
+		if (event.keyCode === 13)
+			$scope.submitWord();
+	}
+	
 	function isWordValid() {
 		return $scope.word && $scope.validationPattern.test($scope.word);
 	};
