@@ -6,6 +6,7 @@
 		<meta name="theme-color" content="#7BB1FF">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="SFM">
 
 		<link rel="stylesheet"  href="styles/angular-material.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -18,7 +19,7 @@
 					<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
 					<md-card-content>
 						<h2 class="md-title" ng-bind="legendMessage"></h2>
-						<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required autofocus>
+						<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" autocomplete="off" required>
 						<p id="validation-message" ng-show="!isWordValid()" ng-bind="patternMessage"></p>
 					</md-card-content>
 					<md-card-actions layout="row" layout-align="end center">
