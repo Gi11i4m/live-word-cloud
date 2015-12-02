@@ -39,7 +39,7 @@ wordCloud.service("strings", function() {
 	
 });
 
-wordCloud.controller('WordCloudController', function($timeout, $interval, $log, wordRepository, strings) {
+wordCloud.controller('WordCloudCtrl', function($timeout, $interval, $log, wordRepository, strings) {
 
 	this.font = strings.FONT;
 	this.angleCount = 7;
@@ -68,7 +68,7 @@ wordCloud.controller('WordCloudController', function($timeout, $interval, $log, 
 	wordPoll = $interval(refreshWordsIfChanged, 3000);
 });
 
-wordCloud.controller('WordCloudUpdateController', function($log, wordRepository, strings) {
+wordCloud.controller('WordCloudUpdateCtrl', function($log, wordRepository, strings) {
 	this.word = strings.WORD_DEFAULT;
 	this.legendMessage = strings.LEGEND_MESSAGE_DEFAULT;
 	this.validationPattern = strings.VALIDATION_PATTERN;

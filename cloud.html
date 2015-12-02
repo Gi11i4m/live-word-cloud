@@ -4,21 +4,21 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 	</head>
-	<body ng-controller="WordCloudController" id="word_cloud_body">
+	<body ng-controller="WordCloudCtrl as wCCtrl" id="word_cloud_body">
 		
 		<!-- Placeholder -->
 		<div id="vis"></div>
 		
 		<!-- Settings -->
 		<form id="form">
-			<textarea id="text" ng-model="words"></textarea>
+			<textarea id="text" ng-model="wCCtrl.words"></textarea>
 			<button id="go" type="submit"></button>
-			<input type="text" id="font" ng-model="font">
-			<input type="number" id="angle-count" 	ng-model="angleCount" min="1" value="7">
-			<input type="number" id="angle-from" 	ng-model="angleFrom" min="-90" max="90" value="-90">
-			<input type="number" id="angle-to" 		ng-model="angleTo" min="-90" max="90" value="90">
-			<input type="number" id="max" 			ng-model="numberOfWords" min="1" value="300">
-			<input type="checkbox" id="per-line" 	ng-model="oneWordPerLine">
+			<input type="text" id="font" ng-model="wCCtrl.font">
+			<input type="number" id="angle-count" 	ng-model="wCCtrl.angleCount" min="1" value="7">
+			<input type="number" id="angle-from" 	ng-model="wCCtrl.angleFrom" min="-90" max="90" value="-90">
+			<input type="number" id="angle-to" 		ng-model="wCCtrl.angleTo" min="-90" max="90" value="90">
+			<input type="number" id="max" 			ng-model="wCCtrl.numberOfWords" min="1" value="300">
+			<input type="checkbox" id="per-line" 	ng-model="wCCtrl.oneWordPerLine">
 			
 			<input type="radio" name="spiral" id="archimedean" value="archimedean" checked="checked">
 			<input type="radio" name="spiral" id="rectangular" value="rectangular">
