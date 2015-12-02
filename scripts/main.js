@@ -95,11 +95,11 @@ wordCloud.controller('WordCloudUpdateController', function($log, wordRepository,
 	this.enterSubmit = function(event) {
 		if (event.keyCode === 13)
 			this.submitWord();
-	}
+	};
 	
 	function isWordValid() {
 		return this.word && this.validationPattern.test(this.word);
-	};
+	}
 	
 	function success(response) {
 		$log.info(response);
