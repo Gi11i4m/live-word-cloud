@@ -22,7 +22,7 @@ wordCloud.factory('wordRepository', function($http) {
 });
 
 wordCloud.constant("strings", {
-	WORDS_UNCHANGED_MESSAGE: "Words unchanged"
+	WORDS_UNCHANGED_MESSAGE: "Words are unchanged"
 });
 
 wordCloud.controller('WordCloudController', function($timeout, $interval, $log, wordRepository, strings) {
