@@ -13,18 +13,18 @@
 	</head>
 	<body>
 
-		<div ng-controller="WordCloudUpdateController" ng-cloak>
+		<div ng-controller="WordCloudUpdateController as wordCloudUpdateController" ng-cloak>
 			<md-content class="md-padding">
 				<md-card>
-					<img ng-src="{{imagePath}}" class="md-card-image" alt="Card Image">
+					<img ng-src="wordCloudUpdateController.imagePath" class="md-card-image" alt="Card Image">
 					<md-card-content>
-						<h2 class="md-title" ng-bind="legendMessage"></h2>
-						<input type="text" id="word" name="word" ng-model="word" ng-disabled="isTextfieldDisabled" ng-keypress="enterSubmit($event)" autocomplete="off" required>
-						<p id="validation-message" ng-show="!isWordValid()">{{patternMessage}}</p>
+						<h2 class="md-title" ng-bind="wordCloudUpdateController.legendMessage"></h2>
+						<input type="text" id="word" name="word" ng-model="word" ng-disabled="wordCloudUpdateController.isTextfieldDisabled" ng-keypress="wordCloudUpdateController.enterSubmit($event)" autocomplete="off" required>
+						<p id="validation-message" ng-show="!wordCloudUpdateController.isWordValid()">{{wordCloudUpdateController.patternMessage}}</p>
 					</md-card-content>
 					<md-card-actions layout="row" layout-align="end center">
-						<md-button ng-bind="resetButtonValue" ng-click="reset()" aria-label="reset"></md-button>
-						<md-button ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue" ng-click="submitWord()" aria-label="submit"></md-button>
+						<md-button ng-bind="wordCloudUpdateController.resetButtonValue" ng-click="wordCloudUpdateController.reset()" aria-label="reset"></md-button>
+						<md-button ng-disabled="wordCloudUpdateController.isSubmitDisabled || !wordCloudUpdateController.isWordValid()" ng-bind="wordCloudUpdateController.submitButtonValue" ng-click="wordCloudUpdateController.submitWord()" aria-label="submit"></md-button>
 					</md-card-actions>
 				</md-card>
 			</md-content>
