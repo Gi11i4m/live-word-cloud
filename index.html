@@ -23,7 +23,7 @@
 						<p id="validation-message" ng-show="!isWordValid()">{{patternMessage}}</p>
 					</md-card-content>
 					<md-card-actions layout="row" layout-align="end center">
-						<md-button ng-show="isResetVisible" ng-bind="resetButtonValue" ng-click="reset()" aria-label="reset"></md-button>
+						<md-button  ng-bind="resetButtonValue" ng-click="reset()" aria-label="reset"></md-button>
 						<md-button ng-disabled="isSubmitDisabled || !isWordValid()" ng-bind="submitButtonValue" ng-click="submitWord()" aria-label="submit"></md-button>
 					</md-card-actions>
 				</md-card>
