@@ -1,0 +1,41 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #0AB3F6;
+}
+#word_cloud_body {
+	background-color: white;
+	overflow: hidden;
+}
+.md-padding {
+	background-color: #0AB3F6;
+}
+#vis {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+#form {
+	display: none;
+}
+#text {
+	width: 100%;
+	height: 100px;
+}
+#validation-message {
+	color: crimson;
+   	text-align: center;
+}
+#word {
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+@media screen and (min-width: 800px) {
+	.md-padding {
+		padding-left: 30%;
+		padding-right: 30%;
+	}
+}
